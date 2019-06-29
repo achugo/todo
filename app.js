@@ -2,9 +2,12 @@
 const search = document.querySelector('.search input');
 
 const formAdd = document.querySelector('.add');
-const list = document.querySelector('.todos')
+const list = document.querySelector('.todos');
+
+const todoArray = [];
 
 const todoTemplate = todo => {
+    
     const html = `
     <li class="list-group-item d-flex justify-content-between align-items-center">
     <span>${todo}</span>
@@ -20,6 +23,8 @@ formAdd.addEventListener('submit', (e) => {
 
     const insert = formAdd.add.value.trim()
     if (insert.length) {
+        todoArray.push(insert)
+        localStorage.setItem('todos', todoArray)
         todoTemplate(insert);
         formAdd.reset()
     }
@@ -30,7 +35,14 @@ formAdd.addEventListener('submit', (e) => {
 //delete todos
 list.addEventListener('click', e => {
     if(e.target.classList.contains('delete')){
+        let item = e.target.parentElement.textContent.trim()
+        let filterStorage = todoArray.filter((todo) => {
+            return todo !== item
+        })
+        console.log(filterStorage)
+        localStorage.setItem('todos', filterStorage)
         e.target.parentElement.remove()
+        
     }
 })
 
@@ -48,3 +60,26 @@ search.addEventListener('keyup', () => {
     const term = search.value.trim().toLowerCase()
     filterTodos(term)
 })
+
+//update todo with local storage
+
+//check if todo list exist in local storage
+//loop through array of todos
+//update ui for each one 
+
+
+
+if(localStorage.getItem('todos')){
+    let storedTodos = localStorage.getItem('todos').split(',')
+    Array.from(storedTodos).forEach(element => {
+            console.log(element)
+            const html = `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>${element}</span>
+            <i class="fa fa-trash-alt delete"></i>
+            </li>
+            `
+            list.innerHTML += html;
+        
+    });
+}
