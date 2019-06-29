@@ -4,7 +4,7 @@ const search = document.querySelector('.search input');
 const formAdd = document.querySelector('.add');
 const list = document.querySelector('.todos');
 
-const todoArray = [];
+let todoArray = localStorage.getItem('todos').split(',')
 
 const todoTemplate = todo => {
     
@@ -36,11 +36,11 @@ formAdd.addEventListener('submit', (e) => {
 list.addEventListener('click', e => {
     if(e.target.classList.contains('delete')){
         let item = e.target.parentElement.textContent.trim()
-        let filterStorage = todoArray.filter((todo) => {
+        todoArray = todoArray.filter((todo) => {
             return todo !== item
         })
-        console.log(filterStorage)
-        localStorage.setItem('todos', filterStorage)
+        // console.log(filterStorage)
+        localStorage.setItem('todos', todoArray)
         e.target.parentElement.remove()
         
     }
