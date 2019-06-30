@@ -48,11 +48,11 @@ list.addEventListener('click', e => {
 
 const filterTodos = (term) => {
     Array.from(list.children)
-        .filter((todo) =>  !todo.textContent.toLocaleLowerCase.includes(term))
+        .filter((todo) =>  !todo.textContent.toLocaleLowerCase().includes(term))
         .forEach((todo) => todo.classList.add('filtered'));
 
         Array.from(list.children)
-        .filter((todo) =>  todo.textContent.toLowerCase.includes(term))
+        .filter((todo) =>  todo.textContent.toLowerCase().includes(term))
         .forEach((todo) => todo.classList.remove('filtered'))
 }
 //search todo keypupevent
@@ -80,6 +80,5 @@ if(localStorage.getItem('todos')){
             </li>
             `
             list.innerHTML += html;
-        
     });
 }
