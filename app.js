@@ -4,6 +4,10 @@ const search = document.querySelector('.search input');
 const formAdd = document.querySelector('.add');
 const list = document.querySelector('.todos');
 
+let todoArray = null;
+
+localStorage.getItem('todos') === null ? todoArray = [] : todoArray = localStorage.getItem('todos').split(',') 
+
 
 
 const todoTemplate = todo => {
@@ -20,12 +24,12 @@ const todoTemplate = todo => {
 
 formAdd.addEventListener('submit', (e) => {
     e.preventDefault();
-    let todoArray = []
+
     const insert = formAdd.add.value.trim()
     if (insert.length) {
         todoArray.push(insert)
         localStorage.setItem('todos', todoArray)
-        todoArray = localStorage.getItem('todos').split(',')
+        // todoArray = localStorage.getItem('todos').split(',')
         todoTemplate(insert);
         formAdd.reset()
     }
