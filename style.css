@@ -1,5 +1,5 @@
 body{
- background: #352f5b;  
+ background:  #352f5b;
 }
 
 .container{
@@ -23,4 +23,9 @@ input[type=text]:focus{
 
 .filtered{
     display: none !important;
+}
+
+form button{
+    background-color:#423a6f !important;
+    color: #fff !important
 }
